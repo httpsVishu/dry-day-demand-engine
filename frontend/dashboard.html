@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Coolberg Dry Day Engine</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div id="loading-overlay">
+  <div class="loading-text">LOADING ENGINE</div>
+  <div class="loading-bar"></div>
+</div>
+
+<div id="error-banner"></div>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">COOL<span>BERG</span></a>
+  <div class="nav-actions">
+    <button class="nav-btn" id="recalc-btn" onclick="recalculate()">RECALCULATE</button>
+    <button class="nav-btn primary" onclick="API.exportCSV()">EXPORT CSV ↓</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <p class="hero-eyebrow">SALES OPS INTELLIGENCE · REAL-TIME DEMAND SIGNALS</p>
+  <h1 class="hero-title">DRY DAY<br><span class="highlight">DEMAND</span><br>ENGINE</h1>
+  <p class="hero-subtitle">PRE-POSITION COOLBERG STOCK BEFORE DEMAND SPIKES</p>
+  <div class="hero-actions">
+    <button class="nav-btn primary" onclick="document.getElementById('recommendations-section').scrollIntoView({behavior:'smooth'})">
+      VIEW RECOMMENDATIONS ↓
+    </button>
+    <button class="nav-btn" onclick="document.getElementById('alerts-section').scrollIntoView({behavior:'smooth'})">
+      ALERTS ↓
+    </button>
+  </div>
+</section>
+
+<section class="section">
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-label">Upcoming Dry Days</div>
+      <div class="metric-value" id="metric-upcoming">—</div>
+      <div class="metric-sub">NEXT 90 DAYS</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">High Priority Cities</div>
+      <div class="metric-value" id="metric-cities">—</div>
+      <div class="metric-sub">CRITICAL + HIGH</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Units to Pre-position</div>
+      <div class="metric-value" id="metric-units">—</div>
+      <div class="metric-sub">TOTAL ACROSS ALL CITIES</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Alerts Generated</div>
+      <div class="metric-value" id="metric-alerts">—</div>
+      <div class="metric-sub">ACTIVE ALERTS</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="alerts-section">
+  <div class="section-header">
+    <h2 class="section-title">ACTIVE ALERTS</h2>
+    <span class="section-count">TOP PRIORITY · COPY-READY</span>
+  </div>
+  <div class="alerts-grid" id="alert-previews"></div>
+</section>
+
+<div class="two-col">
+  <section class="section" id="recommendations-section">
+    <div class="section-header">
+      <h2 class="section-title">RECOMMENDATIONS</h2>
+      <span class="section-count">CITY-LEVEL · SKU-LEVEL</span>
+    </div>
+
+    <div class="filters-bar">
+      <select class="filter-select" id="filter-state">
+        <option value="">ALL STATES</option>
+      </select>
+      <select class="filter-select" id="filter-city">
+        <option value="">ALL CITIES</option>
+      </select>
+      <select class="filter-select" id="filter-priority">
+        <option value="">ALL PRIORITY</option>
+        <option value="Critical">CRITICAL</option>
+        <option value="High">HIGH</option>
+        <option value="Medium">MEDIUM</option>
+        <option value="Low">LOW</option>
+      </select>
+      <select class="filter-select" id="filter-days">
+        <option value="">ALL TIMEFRAMES</option>
+        <option value="1">WITHIN 1 DAY</option>
+        <option value="3">WITHIN 3 DAYS</option>
+        <option value="7">WITHIN 7 DAYS</option>
+        <option value="14">WITHIN 14 DAYS</option>
+      </select>
+      <button class="filter-btn apply" onclick="applyFilters()">APPLY</button>
+      <button class="filter-btn" onclick="clearFilters()">CLEAR</button>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>DATE</th>
+            <th>CITY</th>
+            <th>TYPE</th>
+            <th>REASON</th>
+            <th>PRIORITY</th>
+            <th>TOP SKUS</th>
+            <th>TOTAL UNITS</th>
+            <th>STATUS</th>
+          </tr>
+        </thead>
+        <tbody id="rec-table-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">TIMELINE</h2>
+    </div>
+    <div class="timeline" id="timeline-container"></div>
+  </section>
+</div>
+
+<div class="modal-overlay" id="detail-modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-city-name" id="modal-city"></div>
+        <div class="modal-meta">
+          <span class="modal-date-tag" id="modal-date"></span>
+          <span id="modal-priority"></span>
+          <span class="modal-date-tag" id="modal-days"></span>
+        </div>
+        <div style="font-size:13px;color:var(--text-muted);margin-top:6px" id="modal-reason"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-total-row">
+        <span class="modal-total-label">Total Units to Pre-position</span>
+        <span class="modal-total-value" id="modal-total"></span>
+      </div>
+
+      <div class="modal-section-title">SKU BREAKDOWN</div>
+      <div class="sku-grid" id="modal-sku-grid"></div>
+
+      <div class="modal-section-title">COPY-READY ALERT MESSAGE</div>
+      <div class="modal-alert-box" id="modal-alert-text"></div>
+      <button class="btn-copy" id="modal-copy-btn" onclick="copyModalAlert()">COPY MESSAGE</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/utils.js"></script>
+<script src="js/api.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

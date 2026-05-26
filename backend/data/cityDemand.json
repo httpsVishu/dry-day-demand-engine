@@ -1,0 +1,210 @@
+{
+  "Mumbai": {
+    "Malt": 200,
+    "Cranberry": 120,
+    "Peach": 90,
+    "Mint": 80,
+    "Ginger": 70,
+    "Strawberry": 110
+  },
+  "Pune": {
+    "Malt": 130,
+    "Cranberry": 80,
+    "Peach": 65,
+    "Mint": 55,
+    "Ginger": 50,
+    "Strawberry": 75
+  },
+  "Nagpur": {
+    "Malt": 80,
+    "Cranberry": 50,
+    "Peach": 40,
+    "Mint": 35,
+    "Ginger": 30,
+    "Strawberry": 45
+  },
+  "Nashik": {
+    "Malt": 60,
+    "Cranberry": 40,
+    "Peach": 30,
+    "Mint": 25,
+    "Ginger": 25,
+    "Strawberry": 35
+  },
+  "Aurangabad": {
+    "Malt": 55,
+    "Cranberry": 35,
+    "Peach": 28,
+    "Mint": 22,
+    "Ginger": 20,
+    "Strawberry": 30
+  },
+  "New Delhi": {
+    "Malt": 180,
+    "Cranberry": 100,
+    "Peach": 85,
+    "Mint": 75,
+    "Ginger": 65,
+    "Strawberry": 95
+  },
+  "Dwarka": {
+    "Malt": 70,
+    "Cranberry": 45,
+    "Peach": 35,
+    "Mint": 30,
+    "Ginger": 25,
+    "Strawberry": 40
+  },
+  "Rohini": {
+    "Malt": 65,
+    "Cranberry": 40,
+    "Peach": 32,
+    "Mint": 28,
+    "Ginger": 22,
+    "Strawberry": 36
+  },
+  "Saket": {
+    "Malt": 60,
+    "Cranberry": 38,
+    "Peach": 30,
+    "Mint": 26,
+    "Ginger": 20,
+    "Strawberry": 34
+  },
+  "Bangalore": {
+    "Malt": 170,
+    "Cranberry": 105,
+    "Peach": 88,
+    "Mint": 78,
+    "Ginger": 68,
+    "Strawberry": 98
+  },
+  "Mysore": {
+    "Malt": 75,
+    "Cranberry": 48,
+    "Peach": 38,
+    "Mint": 33,
+    "Ginger": 28,
+    "Strawberry": 43
+  },
+  "Hubli": {
+    "Malt": 60,
+    "Cranberry": 38,
+    "Peach": 30,
+    "Mint": 26,
+    "Ginger": 22,
+    "Strawberry": 34
+  },
+  "Mangalore": {
+    "Malt": 65,
+    "Cranberry": 42,
+    "Peach": 33,
+    "Mint": 28,
+    "Ginger": 24,
+    "Strawberry": 37
+  },
+  "Hyderabad": {
+    "Malt": 150,
+    "Cranberry": 92,
+    "Peach": 77,
+    "Mint": 68,
+    "Ginger": 58,
+    "Strawberry": 86
+  },
+  "Secunderabad": {
+    "Malt": 80,
+    "Cranberry": 50,
+    "Peach": 40,
+    "Mint": 35,
+    "Ginger": 30,
+    "Strawberry": 45
+  },
+  "Warangal": {
+    "Malt": 55,
+    "Cranberry": 34,
+    "Peach": 27,
+    "Mint": 23,
+    "Ginger": 19,
+    "Strawberry": 30
+  },
+  "Chennai": {
+    "Malt": 140,
+    "Cranberry": 88,
+    "Peach": 72,
+    "Mint": 63,
+    "Ginger": 55,
+    "Strawberry": 82
+  },
+  "Kolkata": {
+    "Malt": 130,
+    "Cranberry": 82,
+    "Peach": 68,
+    "Mint": 59,
+    "Ginger": 52,
+    "Strawberry": 76
+  },
+  "Jaipur": {
+    "Malt": 110,
+    "Cranberry": 68,
+    "Peach": 56,
+    "Mint": 48,
+    "Ginger": 42,
+    "Strawberry": 62
+  },
+  "Jodhpur": {
+    "Malt": 70,
+    "Cranberry": 44,
+    "Peach": 35,
+    "Mint": 30,
+    "Ginger": 26,
+    "Strawberry": 40
+  },
+  "Udaipur": {
+    "Malt": 65,
+    "Cranberry": 40,
+    "Peach": 32,
+    "Mint": 28,
+    "Ginger": 24,
+    "Strawberry": 36
+  },
+  "Kota": {
+    "Malt": 55,
+    "Cranberry": 34,
+    "Peach": 27,
+    "Mint": 23,
+    "Ginger": 20,
+    "Strawberry": 30
+  },
+  "Ahmedabad": {
+    "Malt": 120,
+    "Cranberry": 75,
+    "Peach": 62,
+    "Mint": 53,
+    "Ginger": 46,
+    "Strawberry": 68
+  },
+  "Surat": {
+    "Malt": 100,
+    "Cranberry": 63,
+    "Peach": 52,
+    "Mint": 44,
+    "Ginger": 38,
+    "Strawberry": 57
+  },
+  "Vadodara": {
+    "Malt": 85,
+    "Cranberry": 53,
+    "Peach": 44,
+    "Mint": 37,
+    "Ginger": 32,
+    "Strawberry": 48
+  },
+  "Rajkot": {
+    "Malt": 70,
+    "Cranberry": 44,
+    "Peach": 35,
+    "Mint": 30,
+    "Ginger": 26,
+    "Strawberry": 40
+  }
+}

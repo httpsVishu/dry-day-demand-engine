@@ -1,0 +1,26 @@
+{
+  "election": {
+    "Malt": 3.0,
+    "Cranberry": 2.8,
+    "Peach": 2.5,
+    "Mint": 2.4,
+    "Ginger": 2.3,
+    "Strawberry": 2.7
+  },
+  "national_holiday": {
+    "Malt": 2.5,
+    "Cranberry": 2.3,
+    "Peach": 2.0,
+    "Mint": 1.9,
+    "Ginger": 1.8,
+    "Strawberry": 2.2
+  },
+  "festival": {
+    "Malt": 2.8,
+    "Cranberry": 2.6,
+    "Peach": 2.3,
+    "Mint": 2.2,
+    "Ginger": 2.1,
+    "Strawberry": 2.5
+  }
+}
