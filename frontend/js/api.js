@@ -17,7 +17,7 @@ const API = {
     return fetchJSON(`/alerts${q ? "?" + q : ""}`);
   },
   recalculate: () => fetchJSON("/recommendations/recalculate", { method: "POST" }),
-  exportCSV: () => {
-    window.open(`${API_BASE}/export/csv`, "_blank");
-  },
+  exportCSV: () => window.open(`${API_BASE}/export/csv`, "_blank"),
+  triggerScrape: () => fetchJSON("/drydays/scrape", { method: "POST" }),
+  getScraperStatus: () => fetchJSON("/scraper/status"),
 };

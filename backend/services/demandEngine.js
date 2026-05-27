@@ -21,8 +21,7 @@ function computeRecommendations() {
     const multipliers = skuMultipliers[dd.type] || skuMultipliers["national_holiday"];
 
     dd.cities.forEach((city) => {
-      const demand = cityDemand[city];
-      if (!demand) return;
+      const demand = cityDemand[city] || cityDemand["Mumbai"];
 
       const skuBreakdown = skus.map((sku) => {
         const normal = demand[sku] || 0;

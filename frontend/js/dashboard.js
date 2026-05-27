@@ -11,16 +11,15 @@ async function initDashboard() {
       API.getAlerts(),
       API.getDryDays(),
     ]);
-
     allRecommendations = recRes.data;
     allAlerts = alertRes.data;
     allDryDays = ddRes.data;
-
     renderMetrics();
     renderAlertBanner();
     renderRecommendationsTable(allRecommendations);
     renderDryDayTimeline();
     populateFilters();
+    loadScraperStatus();
   } catch (e) {
     showError("Failed to load data. Is the backend running?");
   } finally {
@@ -246,3 +245,35 @@ function showError(msg) {
 }
 
 document.addEventListener("DOMContentLoaded", initDashboard);
+
+async function triggerScrape() {
+  const btn = document.getElementById("scrape-btn");
+  const status = document.getElementById("scraper-status");
+  btn.textContent = "SCRAPING...";
+  btn.disabled = true;
+  status.textContent = "FETCHING LIVE DATA...";
+  status.classList.remove("hidden");
+  try {
+    const res = await API.triggerScrape();
+    status.textContent = `✓ ${res.count} DRY DAYS LOADED`;
+    await initDashboard();
+  } catch (e) {
+    status.textContent = "SCRAPE FAILED";
+  } finally {
+    btn.textContent = "SCRAPE LIVE DATA";
+    btn.disabled = false;
+    setTimeout(() => status.classList.add("hidden"), 4000);
+  }
+}
+
+async function loadScraperStatus() {
+  try {
+    const s = await API.getScraperStatus();
+    const status = document.getElementById("scraper-status");
+    if (s.lastScrape) {
+      const ago = Math.round((Date.now() - new Date(s.lastScrape)) / 60000);
+      status.textContent = `LAST SCRAPED ${ago}m AGO · ${s.scraped} LIVE`;
+      status.classList.remove("hidden");
+    }
+  } catch (e) {}
+}

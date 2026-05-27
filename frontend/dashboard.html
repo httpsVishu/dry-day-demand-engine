@@ -4,25 +4,81 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard — Coolberg Dry Day Engine</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="css/styles.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#080c14',
+            card: '#0d1321',
+            elevated: '#111927',
+            border: '#1e2d42',
+            'border-light': '#243344',
+            muted: '#6b8099',
+            dim: '#3d5068',
+            gold: '#D4A843',
+            cranberry: '#C2185B',
+            peach: '#E8873A',
+            mint: '#2E9E6E',
+            critical: '#FF3B3B',
+            high: '#FF8C00',
+          }
+        }
+      }
+    }
+  </script>
 </head>
-<body>
+<body class="bg-bg text-[#e8edf5] min-h-screen">
 
-<div id="loading-overlay">
-  <div class="loading-text">LOADING ENGINE</div>
+<!-- LOADING -->
+<div id="loading-overlay" class="hidden fixed inset-0 z-[300] bg-bg/90 flex-col items-center justify-center gap-4 flex">
+  <span class="font-mono text-[12px] tracking-[4px] text-dim uppercase animate-pulse-text">LOADING ENGINE</span>
   <div class="loading-bar"></div>
 </div>
 
-<div id="error-banner"></div>
+<!-- ERROR -->
+<div id="error-banner" class="hidden mx-12 mt-4 px-5 py-3 font-mono text-[11px] tracking-[1.5px] text-critical border border-critical bg-critical/5"></div>
 
-<nav class="navbar">
-  <a href="index.html" class="nav-logo">COOL<span>BERG</span></a>
-  <div class="nav-actions">
-    <button class="nav-btn" id="recalc-btn" onclick="recalculate()">RECALCULATE</button>
-    <button class="nav-btn primary" onclick="API.exportCSV()">EXPORT CSV ↓</button>
+<!-- NAVBAR -->
+<nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 h-16 bg-bg/95 backdrop-blur border-b border-border">
+  <a href="index.html" class="font-display text-[22px] tracking-[4px]">COOL<span class="text-gold">BERG</span></a>
+
+  <div class="flex items-center gap-3">
+    <span id="scraper-status" class="font-mono text-[10px] tracking-[2px] uppercase hidden" style="color:var(--accent-mint)"></span>
+
+    <button id="scrape-btn" onclick="triggerScrape()"
+            class="flex items-center gap-2 border border-border-light px-4 py-2 font-mono text-[10px] tracking-[2px] uppercase transition-all duration-200 whitespace-nowrap hover:border-mint"
+            style="color:var(--text-muted)" onmouseover="this.style.color='var(--accent-mint)'" onmouseout="this.style.color='var(--text-muted)'">
+      <span class="w-1.5 h-1.5 rounded-full inline-block animate-pulse" style="background:var(--accent-mint)"></span>
+      LIVE DATA
+    </button>
+
+    <button id="recalc-btn" onclick="recalculate()"
+            class="flex items-center gap-2 border border-border-light px-4 py-2 font-mono text-[10px] tracking-[2px] uppercase transition-all duration-200 whitespace-nowrap"
+            style="color:var(--text-muted)" onmouseover="this.style.color='var(--accent-gold)';this.style.borderColor='var(--accent-gold)'" onmouseout="this.style.color='var(--text-muted)';this.style.borderColor='var(--border-light)'">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="23 4 23 10 17 10"></polyline>
+        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+      </svg>
+      RECALCULATE
+    </button>
+
+    <button onclick="API.exportCSV()"
+            class="flex items-center gap-2 px-5 py-2 font-mono text-[10px] tracking-[2px] uppercase transition-all duration-200 whitespace-nowrap font-medium"
+            style="background:var(--accent-gold);color:var(--bg)" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+        <polyline points="7 10 12 15 17 10"></polyline>
+        <line x1="12" y1="15" x2="12" y2="3"></line>
+      </svg>
+      EXPORT CSV
+    </button>
   </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
   <p class="hero-eyebrow">SALES OPS INTELLIGENCE · REAL-TIME DEMAND SIGNALS</p>
   <h1 class="hero-title">DRY DAY<br><span class="highlight">DEMAND</span><br>ENGINE</h1>
@@ -37,6 +93,7 @@
   </div>
 </section>
 
+<!-- METRICS -->
 <section class="section">
   <div class="metrics-grid">
     <div class="metric-card">
@@ -62,6 +119,7 @@
   </div>
 </section>
 
+<!-- ALERTS -->
 <section class="section" id="alerts-section">
   <div class="section-header">
     <h2 class="section-title">ACTIVE ALERTS</h2>
@@ -70,6 +128,7 @@
   <div class="alerts-grid" id="alert-previews"></div>
 </section>
 
+<!-- RECOMMENDATIONS + TIMELINE -->
 <div class="two-col">
   <section class="section" id="recommendations-section">
     <div class="section-header">
@@ -129,6 +188,7 @@
   </section>
 </div>
 
+<!-- DETAIL MODAL -->
 <div class="modal-overlay" id="detail-modal" onclick="if(event.target===this)closeModal()">
   <div class="modal">
     <div class="modal-header">
@@ -162,5 +222,13 @@
 <script src="js/utils.js"></script>
 <script src="js/api.js"></script>
 <script src="js/dashboard.js"></script>
+
+<script>
+  showLoading = (state) => {
+    const el = document.getElementById('loading-overlay');
+    el.style.display = state ? 'flex' : 'none';
+    el.classList.toggle('hidden', !state);
+  };
+</script>
 </body>
 </html>
