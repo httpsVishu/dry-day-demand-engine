@@ -8,7 +8,7 @@ Coolberg loses significant revenue on dry days because stock isn't pre-positione
 
 ## Live Demo
 
-- **Frontend**: [https://coolberg-dry-day-engine.vercel.app](https://dry-day-demand-engine.vercel.app/)
+- **Frontend**: https://dry-day-demand-engine.vercel.app
 - **Backend**: [https://dry-day-demand-engine.onrender.com](https://dry-day-demand-engine.onrender.com)
 
 > Note: Render free tier spins down after inactivity. First load may take 30–60 seconds for the backend to wake up.
