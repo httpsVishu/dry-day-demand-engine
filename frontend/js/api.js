@@ -1,4 +1,6 @@
-const API_BASE = window.location.hostname === "localhost" ? "http://localhost:3001/api" : "/api";
+const API_BASE = window.location.hostname === "localhost"
+  ? "http://localhost:3001/api"
+  : "https://dry-day-demand-engine.onrender.com";
 
 async function fetchJSON(endpoint, options = {}) {
   const res = await fetch(`${API_BASE}${endpoint}`, options);
