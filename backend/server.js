@@ -10,10 +10,12 @@ const PORT = process.env.PORT || 3001;
 app.use(cors({
   origin: [
     "http://localhost:3001",
-    "https://dry-day-demand-engine.vercel.app/"
+    "https://dry-day-demand-engine.onrender.com",
+    "https://dry-day-demand-engine.vercel.app"
   ],
   methods: ["GET", "POST"],
 }));
+
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../frontend")));
 
